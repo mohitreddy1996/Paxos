@@ -13,25 +13,25 @@ const (
 type Message struct {
 	From, To int
 	Type     messageType
-	Key      int
+	Key_     int
 	PrevKey  int
 	Value    string
 }
 
 type PromiseInterface interface {
-	key() int
+	Key() int
 }
 
 type AcceptInterface interface {
-	proposalKey() int
-	proposalValue() string
+	ProposalKey() int
+	ProposalValue() string
 }
 
-func (m Message) key() int {
-	return m.Key
+func (m Message) Key() int {
+	return m.Key_
 }
 
-func (m Message) proposalKey() int {
+func (m Message) ProposalKey() int {
 	switch m.Type {
 	case Promise:
 		return m.PrevKey
@@ -42,7 +42,7 @@ func (m Message) proposalKey() int {
 	}
 }
 
-func (m Message) proposalValue() string {
+func (m Message) ProposalValue() string {
 	switch m.Type {
 	case Promise, Accept:
 		return m.Value

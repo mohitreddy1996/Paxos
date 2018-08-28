@@ -46,7 +46,7 @@ func (paxosNetwork *PaxosNetwork) empty() bool {
 	return n == 0
 }
 
-func (paxosNetwork *PaxosNetwork) recvFrom(from int, timeout time.Duration) (paxos.Message, bool) {
+func (paxosNetwork *PaxosNetwork) recv(from int, timeout time.Duration) (paxos.Message, bool) {
 	select {
 	case m := <-paxosNetwork.receiveQueues[from]:
 		log.Printf("networklog: recv %+v", m)
@@ -61,5 +61,5 @@ func (nodeNetwork *NodeNetwork) send(m paxos.Message) {
 }
 
 func (nodeNetwork *NodeNetwork) recv(timeout time.Duration) (paxos.Message, bool) {
-	return nodeNetwork.recvFrom(nodeNetwork.id, timeout)
+	return nodeNetwork.PaxosNetwork.recv(nodeNetwork.id, timeout)
 }
