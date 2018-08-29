@@ -36,7 +36,7 @@ func (m Message) ProposalKey() int {
 	case Promise:
 		return m.PrevKey
 	case Accept:
-		return m.Key
+		return m.Key_
 	default:
 		panic("unexpected proposal key.")
 	}

@@ -5,6 +5,6 @@ import "paxos"
 
 // Network defines the paxos reliable network.
 type Network interface {
-	send(m paxos.Message)
-	recv(timeout time.Duration) (paxos.Message, bool)
+	Send(m paxos.Message)
+	Recv(timeout time.Duration) (paxos.Message, bool)
 }
